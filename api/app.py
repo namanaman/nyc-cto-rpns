@@ -1,8 +1,5 @@
 from flask import Flask, request
-
-DUMMY_DB = [
-    {"first_name": "Naman", "last_name": "Agrawal", "email": "agrawal.nmn@gmail.com"}
-]
+from db_utils import DUMMY_DB, add_user_to_db, remove_user_from_db, is_user_in_db
 
 app = Flask(__name__)
 
@@ -16,21 +13,10 @@ def handle_subscribe():
     if not email or not first_name or not last_name:
         return "Request body had empty value(s)", 400
 
-    is_duplicate = False
-    for i in DUMMY_DB:
-        if i["email"] == data["email"]: 
-            is_duplicate = True
-
-    if is_duplicate:
+    if is_user_in_db(email):
         return "User email already exists in database", 406
-
-    new_subscriber_record = {
-        "email": data['email'],
-        "first_name": data['firstName'],
-        "last_name": data['lastName']
-    }
-    DUMMY_DB.append(new_subscriber_record)
-    print(DUMMY_DB)
+    
+    add_user_to_db(email, first_name, last_name)
 
     return "OK", 200
     
@@ -41,11 +27,9 @@ def handle_unsubscribe():
 
     if not email:
         return "Request body had empty email", 400
-
-    for i in range(len(DUMMY_DB)):
-        if DUMMY_DB[i]['email'] == email:
-            del DUMMY_DB[i]
-            print(DUMMY_DB)
-            return "OK", 200
+    
+    success = remove_user_from_db(email)
+    if success:
+        return "OK", 200
     
     return "User not found in database", 406
