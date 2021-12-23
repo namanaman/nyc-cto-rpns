@@ -3,7 +3,7 @@
 ## About
 This project includes the ReactJS frontend for a landing page that allows users to subscribe/unsubscribe for the RPNS. It also includes the Python Flask web server (API) to handle the requests from the landing page.
 
-The ReactJS frontend and Flask backend would replace the Java Play UI and web server logic. The benefit of React is added user interactions such as switching from subscribe to unsubscribe and alerting the status of subscription without needing to reload the entire page. The benefit of a Flask backend disconnected from the React frontend is that it can be hosted and run separately as its own service, thus decoupling it from the UI technology. The Flask backend would connect to MySQL database and SendGrid server, and the FTP would not need to change. The React frontend + Flask API service could each be hosted on a cloud service such as AWS.
+The ReactJS frontend and Flask backend would replace the Java Play UI and web server logic. The Flask backend would connect to MySQL database and SendGrid server, and the FTP would not need to change. The React frontend + Flask API service could each be hosted on a cloud service such as AWS.
 
 - Backend API Documentation: https://app.swaggerhub.com/apis/naman145/RPNSAPI/1.0.0
 - This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
